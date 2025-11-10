@@ -4,3 +4,4 @@ logs
 *.logs
 
 node_modules/
+driver/
