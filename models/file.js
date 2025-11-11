@@ -21,7 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     sequelize,
     modelName: 'File',
-    tableName: 'files'
+    tableName: 'files'  // 테이블 이름 소문자로 설정
   });
   return File;
 };

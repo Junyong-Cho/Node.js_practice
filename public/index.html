@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Cloud</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <h1>☁️ My Cloud</h1>
+
+    <h2>파일 업로드</h2>
+    <form id="upload-form">
+        <input type="file" id="file-input" required>
+        <button type="submit">업로드</button>
+    </form>
+
+    <h2>파일 목록</h2>
+    <table id="file-list-table">
+        <thead>
+            <tr>
+                <th>파일 ID</th>
+                <th>파일 이름</th>
+                <th>기능</th>
+            </tr>
+        </thead>
+        <tbody id="file-list-body">
+            </tbody>
+    </table>
+
+    <script src="script.js"></script>
+</body>
+</html>

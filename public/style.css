@@ -1,0 +1,54 @@
+/* style.css - 최대한 간단하게 */
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 20px;
+    background-color: #f4f7f6;
+}
+
+h1, h2 {
+    color: #333;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 5px;
+}
+
+/* 테이블 스타일 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+th, td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f9f9f9;
+}
+
+/* 버튼 스타일 */
+button, a.button {
+    cursor: pointer;
+    padding: 5px 10px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    text-decoration: none;
+    color: white;
+    font-size: 14px;
+}
+
+/* 업로드 폼 */
+#upload-form button {
+    background-color: #007bff; /* 파란색 */
+}
+
+/* 기능 버튼들 */
+.btn-download { background-color: #28a745; } /* 초록색 */
+.btn-stream { background-color: #fd7e14; } /* 주황색 */
+.btn-rename { background-color: #6c757d; } /* 회색 */
+.btn-delete { background-color: #dc3545; } /* 빨간색 */
