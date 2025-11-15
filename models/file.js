@@ -1,3 +1,5 @@
+// npx sequlize-cli model:generate --name File --attributes original_filename:string,stored_filename:string,file_size:integer,mime_type:string
+// 위 명령어로 자동 생성된 파일
 'use strict';
 const {
   Model

@@ -137,6 +137,8 @@ app.post('/upload', upload.single('file'), async (req, res) =>{ // 클라우드 
     if(!req.file)                                               // body에 파일이 없으면 400(bad req)
         return res.status(400).send('No Any files')     
 
+    console.log(req.file)
+
     const {originalname, filename, size, mimetype} = req.file   // File 인스턴스 객체 분해 할당
 
     try{

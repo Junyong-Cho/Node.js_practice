@@ -1,0 +1,45 @@
+services:
+  db:
+    image: postgres:latest  # postgres:latest 이미지 사용
+    env_file:               # 환경 변수 파일
+      ./.env
+    environment:            # postgres 이미지 빌드에 필요한 환경 변수 (.env 파일에서 읽어옴)
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    
+    volumes:                # postgres 컨테이너에서 사용할 볼륨 하단에 cloud_db 볼륨 생성
+      - cloud_db:/var/lib/postgresql
+    ports:                  # 로컬의 6789 포트로 컨테이너의 5432 포트에 접속 (5432 : postgres의 디폴트 포트 번호)
+      - '6789:5432'
+    healthcheck:            # db 컨테이너가 먼저 생성될 때까지 app 컨테이너 실행이 대기할 수 있도록 healthcheck 
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB}"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+      start_period: 30s
+  
+  app:
+    build: .                # 로컬의 Dockerfile 이미지 사용
+    ports:
+      - "8888:8888"         # 로컬의 포트 번호를 컨테이너의 포트 번호와 매핑
+    volumes:                # 로컬의 driver(클라우드 파일이 저장되는 경로)를 컨테이너의 driver로 설정
+      - ./driver:/app/driver
+    env_file:               # 환경 변수 파일
+      ./.env
+    environment:
+      LANG: C.UTF-8
+      LC_ALL: C.UTF-8
+    depends_on:             # db 컨테이너가 실행된 이후에 실행되도록
+      db:
+        condition: service_healthy
+    
+    command: >              # 컨테이너가 생성되고 마이그레이션으로 db 구조 초기화
+      sh -c "npx sequelize-cli db:migrate &&
+            node app"
+
+    
+volumes:
+  cloud_db:
